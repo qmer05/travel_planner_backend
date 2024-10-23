@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotels List</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="container">
+    <h1>Hotels List</h1>
+    <div id="hotels-list" class="hotel-list">
+        <!-- Hotels will be dynamically added here -->
+    </div>
+</div>
+
+<script>
+    async function fetchHotels() {
+        try {
+            const response = await fetch('/api/hotels'); // Make sure your Javalin server runs on localhost or correct URL
+            const hotels = await response.json();
+
+            const hotelsList = document.getElementById('hotels-list');
+            hotels.forEach(hotel => {
+                // Create hotel item
+                const hotelDiv = document.createElement('div');
+                hotelDiv.className = 'hotel';
+
+                // Set inner HTML for hotel
+                hotelDiv.innerHTML = `
+                        <h2>${hotel.name}</h2>
+                        <p><strong>Location:</strong> ${hotel.location}</p>
+                        <p><strong>Rating:</strong> ${hotel.rating}</p>
+                    `;
+
+                // Append the hotel div to the list
+                hotelsList.appendChild(hotelDiv);
+            });
+        } catch (error) {
+            console.error('Error fetching hotel data:', error);
+        }
+    }
+
+    // Fetch hotels when the page loads
+    window.onload = fetchHotels;
+</script>
+</body>
+</html>
