@@ -30,7 +30,7 @@ public class ApplicationConfig {
         config.router.apiBuilder(routes.getRoutes());
         config.router.apiBuilder(SecurityRoutes.getSecuredRoutes());
         config.router.apiBuilder(SecurityRoutes.getSecurityRoutes());
-
+        config.staticFiles.add("/public", Location.CLASSPATH);
     }
 
     public static Javalin startServer(int port) {

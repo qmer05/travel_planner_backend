@@ -4,39 +4,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
-    <title>Hotel List</title>
+    <title>Hotel Listings</title>
 </head>
 <body>
-<div id="hotel-list">
-    <h1>Hotel List</h1>
-    <ul id="hotel-container"></ul>
+<div class="header">
+    <h1>Welcome to Our Hotel Listings</h1>
+    <p>Find the best hotel deals in your area!</p>
+</div>
+
+<div class="container">
+    <div class="grid" id="hotelList">
+        <!-- Hotel cards will be inserted here dynamically -->
+    </div>
+</div>
+
+<div class="footer">
+    <p>&copy; 2024 Hotel Listings. All rights reserved.</p>
 </div>
 
 <script>
-    async function fetchHotels() {
-        try {
-            const response = await fetch('https://hotelapi.omertech.dk/api/hotels');
-            if (!response.ok) {
-                throw new Error('Network response was not ok ' + response.statusText);
-            }
-            const hotels = await response.json();
-            displayHotels(hotels);
-        } catch (error) {
-            console.error('There has been a problem with your fetch operation:', error);
-        }
-    }
-
-    function displayHotels(hotels) {
-        const container = document.getElementById('hotel-container');
-        hotels.forEach(hotel => {
-            const listItem = document.createElement('li');
-            listItem.textContent = `${hotel.hotelName}, ${hotel.hotelAddress}, Type: ${hotel.hotelType}`;
-            container.appendChild(listItem);
-        });
-    }
-
-    // Fetch hotels when the page loads
-    window.onload = fetchHotels;
+    // Fetch the hotel data from the API and display it
+    fetch('/api/hotels')
+        .then(response => response.json())
+        .then(data => {
+            const hotelList = document.getElementById('hotelList');
+            data.forEach(hotel => {
+                const hotelCard = document.createElement('div');
+                hotelCard.className = 'hotel-card';
+                hotelCard.innerHTML = `
+                        <h2>${hotel.hotelName}</h2>
+                        <div class="hotel-info">
+                            <p><strong>Address:</strong> ${hotel.hotelAddress}</p>
+                            <p><strong>Type:</strong> ${hotel.hotelType}</p>
+                        </div>
+                        <div class="room-list">
+                            <h3>Available Rooms:</h3>
+                            <ul>
+                                ${hotel.rooms.map(room => `
+                                    <li>
+                                        Room Number: ${room.roomNumber},
+                                        Type: ${room.roomType},
+                                        Price: $${room.roomPrice}
+                                    </li>
+                                `).join('')}
+                            </ul>
+                        </div>
+                    `;
+                hotelList.appendChild(hotelCard);
+            });
+        })
+        .catch(error => console.error('Error fetching hotel data:', error));
 </script>
 </body>
 </html>
