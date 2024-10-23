@@ -19,7 +19,7 @@ public class Populate {
 
         try (var em = emf.createEntityManager()) {
             em.getTransaction().begin();
-            Hotel california = new Hotel("Hotel Testiformia", "California", Hotel.HotelType.LUXURY);
+            Hotel california = new Hotel("Hotel California", "California", Hotel.HotelType.LUXURY);
             Hotel hilton = new Hotel("Hilton", "Copenhagen", Hotel.HotelType.STANDARD);
             california.setRooms(calRooms);
             hilton.setRooms(hilRooms);
