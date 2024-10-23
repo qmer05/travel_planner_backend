@@ -127,7 +127,7 @@ body {
 }
 
 .header-image {
-    width: 20%;  /* Set the image width to 10% of its original size */
+    width: 15%;  /* Set the image width to 10% of its original size */
     height: auto; /* Keeps the aspect ratio */
     margin-top: 10px; /* Adds some space above the image */
     border-radius: 8px; /* Optional: adds rounded corners */
