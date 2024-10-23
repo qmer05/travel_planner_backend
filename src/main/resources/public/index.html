@@ -17,8 +17,13 @@
 <script>
     async function fetchHotels() {
         try {
-            const response = await fetch('/api/hotels'); // Make sure your Javalin server runs on localhost or correct URL
+            const response = await fetch('/api/hotels'); // Correct API endpoint
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+
             const hotels = await response.json();
+            console.log("Hotels data fetched:", hotels); // Log the data to check the structure
 
             const hotelsList = document.getElementById('hotels-list');
             hotels.forEach(hotel => {
@@ -26,11 +31,11 @@
                 const hotelDiv = document.createElement('div');
                 hotelDiv.className = 'hotel';
 
-                // Set inner HTML for hotel
+                // Set inner HTML for hotel without rooms
                 hotelDiv.innerHTML = `
-                        <h2>${hotel.name}</h2>
-                        <p><strong>Location:</strong> ${hotel.location}</p>
-                        <p><strong>Rating:</strong> ${hotel.rating}</p>
+                        <h2>${hotel.hotelName}</h2>
+                        <p><strong>Address:</strong> ${hotel.hotelAddress}</p>
+                        <p><strong>Type:</strong> ${hotel.hotelType}</p>
                     `;
 
                 // Append the hotel div to the list
