@@ -17,7 +17,8 @@
 <script>
     async function fetchHotels() {
         try {
-            const response = await fetch('/api/hotels'); // Correct API endpoint
+            // Use the deployed API URL
+            const response = await fetch('https://hotelapi.omertech.dk/api/hotels');
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
