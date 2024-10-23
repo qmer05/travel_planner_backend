@@ -120,3 +120,16 @@ body {
 .room-list li:last-child {
     border-bottom: none;
 }
+
+.header {
+    text-align: center;
+    padding: 20px;
+}
+
+.header-image {
+    max-width: 100%;  /* Makes the image responsive */
+    height: auto;     /* Keeps the aspect ratio */
+    margin-top: 10px; /* Adds some space above the image */
+    border-radius: 8px; /* Optional: adds rounded corners */
+}
+
