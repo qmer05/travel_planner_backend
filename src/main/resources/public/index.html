@@ -3,48 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hotels List</title>
     <link rel="stylesheet" href="styles.css">
+    <title>Hotel List</title>
 </head>
 <body>
-<div class="container">
-    <h1>Hotels List</h1>
-    <div id="hotels-list" class="hotel-list">
-        <!-- Hotels will be dynamically added here -->
-    </div>
+<div id="hotel-list">
+    <h1>Hotel List</h1>
+    <ul id="hotel-container"></ul>
 </div>
 
 <script>
     async function fetchHotels() {
         try {
-            // Use the deployed API URL
             const response = await fetch('https://hotelapi.omertech.dk/api/hotels');
             if (!response.ok) {
-                throw new Error('Network response was not ok');
+                throw new Error('Network response was not ok ' + response.statusText);
             }
-
             const hotels = await response.json();
-            console.log("Hotels data fetched:", hotels); // Log the data to check the structure
-
-            const hotelsList = document.getElementById('hotels-list');
-            hotels.forEach(hotel => {
-                // Create hotel item
-                const hotelDiv = document.createElement('div');
-                hotelDiv.className = 'hotel';
-
-                // Set inner HTML for hotel without rooms
-                hotelDiv.innerHTML = `
-                        <h2>${hotel.hotelName}</h2>
-                        <p><strong>Address:</strong> ${hotel.hotelAddress}</p>
-                        <p><strong>Type:</strong> ${hotel.hotelType}</p>
-                    `;
-
-                // Append the hotel div to the list
-                hotelsList.appendChild(hotelDiv);
-            });
+            displayHotels(hotels);
         } catch (error) {
-            console.error('Error fetching hotel data:', error);
+            console.error('There has been a problem with your fetch operation:', error);
         }
+    }
+
+    function displayHotels(hotels) {
+        const container = document.getElementById('hotel-container');
+        hotels.forEach(hotel => {
+            const listItem = document.createElement('li');
+            listItem.textContent = `${hotel.hotelName}, ${hotel.hotelAddress}, Type: ${hotel.hotelType}`;
+            container.appendChild(listItem);
+        });
     }
 
     // Fetch hotels when the page loads
