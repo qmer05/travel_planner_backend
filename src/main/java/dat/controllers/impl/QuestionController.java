@@ -2,21 +2,21 @@ package dat.controllers.impl;
 
 import dat.config.HibernateConfig;
 import dat.controllers.IController;
-import dat.daos.impl.HotelDAO;
-import dat.dtos.HotelDTO;
-import dat.entities.Hotel;
+import dat.daos.impl.QuestionDAO;
+import dat.dtos.QuestionDTO;
+import dat.entities.Question;
 import io.javalin.http.Context;
 import jakarta.persistence.EntityManagerFactory;
 
 import java.util.List;
 
-public class HotelController implements IController<HotelDTO, Integer> {
+public class QuestionController implements IController<QuestionDTO, Integer> {
 
-    private final HotelDAO dao;
+    private final QuestionDAO dao;
 
-    public HotelController() {
+    public QuestionController() {
         EntityManagerFactory emf = HibernateConfig.getEntityManagerFactory();
-        this.dao = HotelDAO.getInstance(emf);
+        this.dao = QuestionDAO.getInstance(emf);
     }
 
     @Override
@@ -24,30 +24,30 @@ public class HotelController implements IController<HotelDTO, Integer> {
         // request
         int id = ctx.pathParamAsClass("id", Integer.class).check(this::validatePrimaryKey, "Not a valid id").get();
         // DTO
-        HotelDTO hotelDTO = dao.read(id);
+        QuestionDTO questionDTO = dao.read(id);
         // response
         ctx.res().setStatus(200);
-        ctx.json(hotelDTO, HotelDTO.class);
+        ctx.json(questionDTO, QuestionDTO.class);
     }
 
     @Override
     public void readAll(Context ctx) {
         // List of DTOS
-        List<HotelDTO> hotelDTOS = dao.readAll();
+        List<QuestionDTO> questionDTOS = dao.readAll();
         // response
         ctx.res().setStatus(200);
-        ctx.json(hotelDTOS, HotelDTO.class);
+        ctx.json(questionDTOS, QuestionDTO.class);
     }
 
     @Override
     public void create(Context ctx) {
         // request
-        HotelDTO jsonRequest = ctx.bodyAsClass(HotelDTO.class);
+        QuestionDTO jsonRequest = ctx.bodyAsClass(QuestionDTO.class);
         // DTO
-        HotelDTO hotelDTO = dao.create(jsonRequest);
+        QuestionDTO questionDTO = dao.create(jsonRequest);
         // response
         ctx.res().setStatus(201);
-        ctx.json(hotelDTO, HotelDTO.class);
+        ctx.json(questionDTO, QuestionDTO.class);
     }
 
     @Override
@@ -55,10 +55,10 @@ public class HotelController implements IController<HotelDTO, Integer> {
         // request
         int id = ctx.pathParamAsClass("id", Integer.class).check(this::validatePrimaryKey, "Not a valid id").get();
         // dto
-        HotelDTO hotelDTO = dao.update(id, validateEntity(ctx));
+        QuestionDTO questionDTO = dao.update(id, validateEntity(ctx));
         // response
         ctx.res().setStatus(200);
-        ctx.json(hotelDTO, Hotel.class);
+        ctx.json(questionDTO, Question.class);
     }
 
     @Override
@@ -76,11 +76,13 @@ public class HotelController implements IController<HotelDTO, Integer> {
     }
 
     @Override
-    public HotelDTO validateEntity(Context ctx) {
-        return ctx.bodyValidator(HotelDTO.class)
-                .check( h -> h.getHotelAddress() != null && !h.getHotelAddress().isEmpty(), "Hotel address must be set")
-                .check( h -> h.getHotelName() != null && !h.getHotelName().isEmpty(), "Hotel name must be set")
-                .check( h -> h.getHotelType() != null, "Hotel type must be set")
+    public QuestionDTO validateEntity(Context ctx) {
+        return ctx.bodyValidator(QuestionDTO.class)
+                .check( q -> q.getQuestion() != null && !q.getQuestion().isEmpty(), "Question must be set")
+                .check( q -> q.getCorrectAnswer() != null && !q.getCorrectAnswer().isEmpty(), "Correct answer must be set")
+                .check( q -> q.getCategory() != null && !q.getCategory().isEmpty(), "Category must be set")
+                .check( q -> q.getDifficulty() != null && !q.getDifficulty().isEmpty(), "Difficulty must be set")
+                .check( q -> q.getIncorrectAnswers() != null && !q.getIncorrectAnswers().isEmpty(), "Incorrect answers must be set")
                 .get();
     }
 

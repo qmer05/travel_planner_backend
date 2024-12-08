@@ -6,7 +6,7 @@ import dat.config.Populate;
 public class Main {
 
     public static void main(String[] args) {
-        ApplicationConfig.startServer(7070);
+        ApplicationConfig.startServer(7080);
         Populate.main(args);
     }
 }
