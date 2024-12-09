@@ -1,13 +1,13 @@
 ## Hotel REST Exercise
 
-This is a simple REST API for a question booking system. 
+This is a simple REST API for a country booking system. 
 It is implemented using Javalin and JPA
 
 ![Hotel](./docs/bates_hotel.jpg)
 
 ### How to run
 
-1. Create a database in your local Postgres instance called `question`
+1. Create a database in your local Postgres instance called `country`
 2. Run the main method in the config.Populate class to populate the database with some data
 3. Run the main method in the Main class to start the server on port 7070
 4. See the routes in your browser at `http://localhost:7070/routes`

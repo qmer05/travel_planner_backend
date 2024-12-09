@@ -44,46 +44,67 @@ Accept: application/json
 Authorization: Bearer {{jwt_token}}
 
 ###
-GET {{url}}/questions
+GET {{url}}/countries
 
 ###
 
-GET {{url}}/questions/2
+GET {{url}}/countries/2
 
 ###
 
-POST {{url}}/questions
+POST {{url}}/countries
 Content-Type: application/json
+Authorization: Bearer {{jwt_token}}
 
 {
-  "category": "geography",
-  "correctAnswer": "Czech Republic",
-  "incorrectAnswers": [
-    "Switzerland",
-    "Norway",
-    "Netherlands"
+  "name": "Argentina",
+  "currencies": [
+    "Argentine peso"
   ],
-  "question": "Brno is a city in which country?",
-  "difficulty": "hard"
+  "capital": "Buenos Aires",
+  "languages": [
+    "Spanish"
+  ],
+  "borders": [
+    "BOL",
+    "BRA",
+    "CHL",
+    "PRY",
+    "URY"
+  ],
+  "area": 2780400.0,
+  "googleMaps": "https://goo.gl/maps/Fu9Ppnvn3cK6cxKK6",
+  "population": 45376763,
+  "flagPng": "https://flagcdn.com/w320/ar.png"
 }
 
 ###
 
-PUT {{url}}/questions/3
+PUT {{url}}/countries/3
 Content-Type: application/json
 
 {
-  "category": "geography",
-  "correctAnswer": "Monkey Island",
-  "incorrectAnswers": [
-    "Switzerland",
-    "Norway",
-    "Netherlands"
+  "name": "Paraguay",
+  "currencies": [
+    "Argentine peso"
   ],
-  "question": "Brno is a city in which country?",
-  "difficulty": "hard"
+  "capital": "Buenos Aires",
+  "languages": [
+    "Spanish"
+  ],
+  "borders": [
+    "BOL",
+    "BRA",
+    "CHL",
+    "PRY",
+    "URY"
+  ],
+  "area": 2780400.0,
+  "googleMaps": "https://goo.gl/maps/Fu9Ppnvn3cK6cxKK6",
+  "population": 45376763,
+  "flagPng": "https://flagcdn.com/w320/ar.png"
 }
 
 ###
 
-DELETE {{url}}/questions/2
+DELETE {{url}}/countries/3

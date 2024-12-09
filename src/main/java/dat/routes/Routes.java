@@ -6,11 +6,11 @@ import static io.javalin.apibuilder.ApiBuilder.*;
 
 public class Routes {
 
-    private final QuestionRoute questionRoute = new QuestionRoute();
+    private final CountryRoute countryRoute = new CountryRoute();
 
     public EndpointGroup getRoutes() {
         return () -> {
-                path("/questions", questionRoute.getRoutes());
+                path("/countries", countryRoute.getRoutes());
         };
     }
 }
