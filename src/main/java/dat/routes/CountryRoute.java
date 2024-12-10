@@ -18,6 +18,9 @@ public class CountryRoute {
             get("/{id}", countryController::read);
             put("/{id}", countryController::update);
             delete("/{id}", countryController::delete);
+
+            // New route to populate countries
+            get("/populate", countryController::populateCountries); // No authentication required here
         };
     }
 }
