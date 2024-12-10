@@ -108,7 +108,3 @@ Content-Type: application/json
 ###
 
 DELETE {{url}}/countries/3
-
-###
-
-GET {{url}}/countries/populate

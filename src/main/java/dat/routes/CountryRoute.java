@@ -13,9 +13,6 @@ public class CountryRoute {
     protected EndpointGroup getRoutes() {
 
         return () -> {
-            // New route to populate countries
-            get("/populate", countryController::populateCountries); // No authentication required here
-
             post("/", countryController::create, Role.USER);
             get("/", countryController::readAll);
             get("/{id}", countryController::read);

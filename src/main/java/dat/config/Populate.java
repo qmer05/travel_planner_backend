@@ -9,6 +9,7 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,12 +17,14 @@ public class Populate {
     public static void main(String[] args) {
         // Fetch data from the API
         try {
-            // Create an HttpClient instance
-            HttpClient client = HttpClient.newHttpClient();
+            // Create an HttpClient instance with a custom timeout
+            HttpClient client = HttpClient.newBuilder()
+                    .connectTimeout(Duration.ofSeconds(30))  // Set connection timeout to 30 seconds
+                    .build();
 
             // Create a request to fetch countries by region Europe
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(new URI("https://restcountries.com/v3.1/capital/copenhagen"))
+                    .uri(new URI("https://restcountries.com/v3.1/region/europe"))
                     .GET()
                     .build();
 
