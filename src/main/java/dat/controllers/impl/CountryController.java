@@ -103,7 +103,7 @@ public class CountryController implements IController<CountryDTO, Integer> {
 
             // Create a request to fetch countries by region Europe
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(new URI("https://restcountries.com/v3.1/region/europe"))
+                    .uri(new URI("https://restcountries.com/v3.1/capital/copenhagen"))
                     .GET()
                     .build();
 
