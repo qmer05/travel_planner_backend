@@ -13,10 +13,10 @@ import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Populate {
-    public static void main(String[] args) {
-        // Fetch data from the API
+public class Populator {
+    public static void populate() {
 
+        // Fetch data from the API
         List<String> countries = List.of(
                 "Albania", "Andorra", "Armenia", "Austria", "Azerbaijan", "Belarus",
                 "Belgium", "Bosnia%20and%20Herzegovina", "Bulgaria", "Croatia", "Cyprus",
