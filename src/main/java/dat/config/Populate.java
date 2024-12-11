@@ -17,18 +17,17 @@ public class Populate {
     public static void main(String[] args) {
         // Fetch data from the API
 
-        List<String> countries = new ArrayList<>();
-        countries.add("Denmark");
-        countries.add("Finland");
-        countries.add("Iceland");
-        countries.add("Norway");
-        countries.add("Sweden");
-        countries.add("Germany");
-        countries.add("Netherlands");
-        countries.add("Switzerland");
-        countries.add("Ireland");
-        countries.add("Belgium");
-        countries.add("France");
+        List<String> countries = List.of(
+                "Albania", "Andorra", "Armenia", "Austria", "Azerbaijan", "Belarus",
+                "Belgium", "Bosnia%20and%20Herzegovina", "Bulgaria", "Croatia", "Cyprus",
+                "Czech%20Republic", "Denmark", "Estonia", "Finland", "France", "Georgia",
+                "Germany", "Greece", "Hungary", "Iceland", "Ireland", "Italy", "Kazakhstan",
+                "Kosovo", "Latvia", "Liechtenstein", "Lithuania", "Luxembourg", "Malta",
+                "Moldova", "Monaco", "Montenegro", "Netherlands", "North%20Macedonia",
+                "Norway", "Poland", "Portugal", "Romania", "San%20Marino", "Serbia",
+                "Slovakia", "Slovenia", "Spain", "Sweden", "Switzerland", "Turkey",
+                "Ukraine", "United%20Kingdom", "Vatican%20City"
+        );
 
         for (String country : countries) {
             try {
