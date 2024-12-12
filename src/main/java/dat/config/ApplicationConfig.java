@@ -31,6 +31,13 @@ public class ApplicationConfig {
         config.router.apiBuilder(SecurityRoutes.getSecuredRoutes());
         config.router.apiBuilder(SecurityRoutes.getSecurityRoutes());
         //config.staticFiles.add("/public", Location.CLASSPATH);
+
+        // CORS configuration
+        config.bundledPlugins.enableCors(cors -> {
+            cors.addRule(it -> {
+                it.anyHost(); // Allow all origins
+            });
+        });
     }
 
     public static Javalin startServer(int port) {
