@@ -13,11 +13,11 @@ public class CountryRoute {
     protected EndpointGroup getRoutes() {
 
         return () -> {
-            post("/", countryController::create, Role.USER);
-            get("/", countryController::readAll);
-            get("/{id}", countryController::read);
-            put("/{id}", countryController::update);
-            delete("/{id}", countryController::delete);
+            post("/", countryController::create, Role.ADMIN);
+            get("/", countryController::readAll, Role.ANYONE);
+            get("/{id}", countryController::read, Role.ADMIN);
+            put("/{id}", countryController::update, Role.ADMIN);
+            delete("/{id}", countryController::delete, Role.ADMIN);
         };
     }
 }
