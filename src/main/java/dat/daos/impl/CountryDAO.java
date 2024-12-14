@@ -52,20 +52,46 @@ public class CountryDAO implements IDAO<CountryDTO, Integer> {
     }
 
     @Override
-    public CountryDTO update(Integer integer, CountryDTO countryDTO) {
+    public CountryDTO update(Integer id, CountryDTO countryDTO) {
         try (EntityManager em = emf.createEntityManager()) {
             em.getTransaction().begin();
-            Country country = em.find(Country.class, integer);
+
+            // Find the existing country
+            Country country = em.find(Country.class, id);
+            if (country == null) {
+                throw new IllegalArgumentException("Country with id " + id + " not found");
+            }
+
+            // Update non-collection fields
             country.setName(countryDTO.getName());
             country.setCapital(countryDTO.getCapital());
-            country.setLanguages(countryDTO.getLanguages());
-            country.setCurrencies(countryDTO.getCurrencies());
             country.setArea(countryDTO.getArea());
             country.setPopulation(countryDTO.getPopulation());
             country.setFlagPng(countryDTO.getFlagPng());
             country.setGoogleMaps(countryDTO.getGoogleMaps());
+
+            // Update the currencies - clear old ones and add new ones
+            if (countryDTO.getCurrencies() != null) {
+                country.getCurrencies().clear();  // Clear old currencies
+                country.getCurrencies().addAll(countryDTO.getCurrencies());  // Add new currencies
+            }
+
+            // Update the languages - clear old ones and add new ones
+            if (countryDTO.getLanguages() != null) {
+                country.getLanguages().clear();  // Clear old languages
+                country.getLanguages().addAll(countryDTO.getLanguages());  // Add new languages
+            }
+
+            // Update the borders - clear old ones and add new ones
+            if (countryDTO.getBorders() != null) {
+                country.getBorders().clear();  // Clear old borders
+                country.getBorders().addAll(countryDTO.getBorders());  // Add new borders
+            }
+
+            // Merge and save updated country entity
             Country mergedCountry = em.merge(country);
             em.getTransaction().commit();
+
             return mergedCountry != null ? new CountryDTO(mergedCountry) : null;
         }
     }
