@@ -39,8 +39,8 @@ Before running this application, ensure that you have the following installed on
 1. Clone this repository:
 
 ```bash
-git clone https://github.com/yourusername/hotel_rest_3sem.git
-cd hotel_rest_3sem
+git clone https://github.com/qmer05/travel_planner_backend
+cd travel_planner_backend
 ```
 
 2. Install the project dependencies using Maven:
